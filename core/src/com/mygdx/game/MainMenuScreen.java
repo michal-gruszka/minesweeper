@@ -39,8 +39,14 @@ public class MainMenuScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.getShapeRenderer().begin(ShapeRenderer.ShapeType.Filled);
-        game.getShapeRenderer().rect(
+        renderBackground(game.getShapeRenderer());
+        stage.act();
+        stage.draw();
+    }
+
+    private void renderBackground(ShapeRenderer renderer) {
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        renderer.rect(
                 0,
                 0,
                 MinesweeperGame.WIDTH,
@@ -49,10 +55,8 @@ public class MainMenuScreen extends ScreenAdapter {
                 Color.DARK_GRAY,
                 Color.LIGHT_GRAY,
                 Color.LIGHT_GRAY
-                );
-        game.getShapeRenderer().end();
-        stage.act();
-        stage.draw();
+        );
+        renderer.end();
     }
 
     private ImageButton createExitButton(Skin skin) {
