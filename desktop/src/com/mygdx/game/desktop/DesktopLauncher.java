@@ -7,6 +7,8 @@ import com.mygdx.game.MinesweeperGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.width = MinesweeperGame.WIDTH;
+		config.height = MinesweeperGame.HEIGHT;
 		new LwjglApplication(new MinesweeperGame(), config);
 	}
 }
