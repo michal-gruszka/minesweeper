@@ -9,6 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = MinesweeperGame.WIDTH;
 		config.height = MinesweeperGame.HEIGHT;
+		config.resizable = false;
 		new LwjglApplication(new MinesweeperGame(), config);
 	}
 }
