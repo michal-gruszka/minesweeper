@@ -14,9 +14,9 @@ public class MinesweeperGame extends Game {
 
     @Override
     public void create() {
-        setScreen(new MainMenuScreen(this));
         this.shapeRenderer = new ShapeRenderer();
         this.spriteBatch = new SpriteBatch();
+        setScreen(new MainMenuScreen(this));
     }
 
     public ShapeRenderer getShapeRenderer() {
