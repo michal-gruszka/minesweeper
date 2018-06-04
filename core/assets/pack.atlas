@@ -1,6 +1,6 @@
 
 pack.png
-size: 1024,128
+size: 1024,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -13,14 +13,14 @@ about_button_gold
   index: -1
 about_button_silver
   rotate: false
-  xy: 2, 44
+  xy: 559, 173
   size: 190, 40
   orig: 190, 40
   offset: 0, 0
   index: -1
 exit_button_gold
   rotate: false
-  xy: 2, 2
+  xy: 2, 44
   size: 190, 40
   orig: 190, 40
   offset: 0, 0
@@ -34,28 +34,35 @@ exit_button_silver
   index: -1
 highscores_button_gold
   rotate: false
-  xy: 194, 44
+  xy: 559, 131
   size: 190, 40
   orig: 190, 40
   offset: 0, 0
   index: -1
 highscores_button_silver
   rotate: false
-  xy: 194, 2
+  xy: 751, 173
   size: 190, 40
   orig: 190, 40
   offset: 0, 0
   index: -1
+logo
+  rotate: false
+  xy: 2, 128
+  size: 555, 85
+  orig: 555, 85
+  offset: 0, 0
+  index: -1
 play_button_gold
   rotate: false
-  xy: 386, 86
+  xy: 2, 2
   size: 190, 40
   orig: 190, 40
   offset: 0, 0
   index: -1
 play_button_silver
   rotate: false
-  xy: 386, 44
+  xy: 194, 44
   size: 190, 40
   orig: 190, 40
   offset: 0, 0
