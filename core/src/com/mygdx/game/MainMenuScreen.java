@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -17,6 +18,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class MainMenuScreen extends ScreenAdapter {
 
+    private static final String ATLAS = "pack.atlas";
+    private static final String LOGO = "logo";
+    private static final int LOGO_XPOS = 30;
+    private static final int LOGO_YPOS = 350;
     private static final String PLAY_BUTTON = "play_button_silver";
     private static final String PLAY_BUTTON_HOVER = "play_button_gold";
     private static final String HIGHSCORES_BUTTON = "highscores_button_silver";
@@ -25,28 +30,33 @@ public class MainMenuScreen extends ScreenAdapter {
     private static final String ABOUT_BUTTON_HOVER = "about_button_gold";
     private static final String EXIT_BUTTON = "exit_button_silver";
     private static final String EXIT_BUTTON_HOVER = "exit_button_gold";
+
     private static final int FIRST_MENU_ITEM_YPOS = (int) (MinesweeperGame.HEIGHT * 0.5);
+    private static final int BUTTON_WIDTH = 190;
     private static final int BUTTON_HEIGHT = 40;
     private static final int BUTTON_SPACING = 20;
-
+    private static final int BUTTON_XPOS = (MinesweeperGame.WIDTH - BUTTON_WIDTH) / 2;
     private static final int PLAY_BUTTON_YPOS = FIRST_MENU_ITEM_YPOS;
     private static final int HIGHSCORES_BUTTON_YPOS = FIRST_MENU_ITEM_YPOS - (BUTTON_HEIGHT + BUTTON_SPACING) * 1;
     private static final int ABOUT_BUTTON_YPOS = FIRST_MENU_ITEM_YPOS - (BUTTON_HEIGHT + BUTTON_SPACING) * 2;
     private static final int EXIT_BUTTON_YPOS = FIRST_MENU_ITEM_YPOS - (BUTTON_HEIGHT + BUTTON_SPACING) * 3;
 
     private MinesweeperGame game;
+    private SpriteBatch batch;
     private Stage stage;
-    private TextureAtlas buttonAtlas;
+    private TextureAtlas atlas;
     private Skin buttonSkin;
+    private Sprite logo;
 
     public MainMenuScreen(MinesweeperGame game) {
-        System.out.println(PLAY_BUTTON_YPOS);
         this.game = game;
+        this.batch = game.getSpriteBatch();
+        this.atlas = new TextureAtlas(Gdx.files.internal(ATLAS));
+        this.buttonSkin = new Skin(atlas);
+        this.logo = new Sprite(atlas.findRegion(LOGO));
+        this.stage = new Stage(new ScreenViewport());
 
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("pack.atlas"));
-        buttonSkin = new Skin(buttonAtlas);
-
-        stage = new Stage(new ScreenViewport());
+        logo.setPosition(LOGO_XPOS, LOGO_YPOS);
         stage.addActor(createPlayButton(buttonSkin));
         stage.addActor(createHighscoresButton(buttonSkin));
         stage.addActor(createAboutButton(buttonSkin));
@@ -58,6 +68,9 @@ public class MainMenuScreen extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderBackground(game.getShapeRenderer());
+        batch.begin();
+        logo.draw(batch);
+        batch.end();
         stage.act();
         stage.draw();
     }
@@ -83,14 +96,11 @@ public class MainMenuScreen extends ScreenAdapter {
         buttonStyle.up = skin.getDrawable(PLAY_BUTTON);
         buttonStyle.over = skin.getDrawable(PLAY_BUTTON_HOVER);
 
-        ImageButton exitButton = new ImageButton(buttonStyle);
+        ImageButton button = new ImageButton(buttonStyle);
+        button.setPosition(BUTTON_XPOS, PLAY_BUTTON_YPOS);
+        button.addListener(playButtonListener());
 
-        exitButton.setPosition(
-                (MinesweeperGame.WIDTH - exitButton.getWidth()) / 2,
-                PLAY_BUTTON_YPOS
-        );
-        exitButton.addListener(playButtonListener());
-        return exitButton;
+        return button;
     }
 
     private ImageButton createHighscoresButton(Skin skin) {
@@ -99,14 +109,11 @@ public class MainMenuScreen extends ScreenAdapter {
         buttonStyle.up = skin.getDrawable(HIGHSCORES_BUTTON);
         buttonStyle.over = skin.getDrawable(HIGHSCORES_BUTTON_HOVER);
 
-        ImageButton exitButton = new ImageButton(buttonStyle);
+        ImageButton button = new ImageButton(buttonStyle);
+        button.setPosition(BUTTON_XPOS, HIGHSCORES_BUTTON_YPOS);
+        button.addListener(highscoresButtonListener());
 
-        exitButton.setPosition(
-                (MinesweeperGame.WIDTH - exitButton.getWidth()) / 2,
-                HIGHSCORES_BUTTON_YPOS
-        );
-        exitButton.addListener(highscoresButtonListener());
-        return exitButton;
+        return button;
     }
 
     private ImageButton createAboutButton(Skin skin) {
@@ -115,14 +122,11 @@ public class MainMenuScreen extends ScreenAdapter {
         buttonStyle.up = skin.getDrawable(ABOUT_BUTTON);
         buttonStyle.over = skin.getDrawable(ABOUT_BUTTON_HOVER);
 
-        ImageButton exitButton = new ImageButton(buttonStyle);
+        ImageButton button = new ImageButton(buttonStyle);
+        button.setPosition(BUTTON_XPOS, ABOUT_BUTTON_YPOS);
+        button.addListener(aboutButtonListener());
 
-        exitButton.setPosition(
-                (MinesweeperGame.WIDTH - exitButton.getWidth()) / 2,
-                ABOUT_BUTTON_YPOS
-        );
-        exitButton.addListener(aboutButtonListener());
-        return exitButton;
+        return button;
     }
 
     private ImageButton createExitButton(Skin skin) {
@@ -131,14 +135,11 @@ public class MainMenuScreen extends ScreenAdapter {
         buttonStyle.up = skin.getDrawable(EXIT_BUTTON);
         buttonStyle.over = skin.getDrawable(EXIT_BUTTON_HOVER);
 
-        ImageButton exitButton = new ImageButton(buttonStyle);
+        ImageButton button = new ImageButton(buttonStyle);
+        button.setPosition(BUTTON_XPOS, EXIT_BUTTON_YPOS);
+        button.addListener(exitButtonListener());
 
-        exitButton.setPosition(
-                (MinesweeperGame.WIDTH - exitButton.getWidth()) / 2,
-                EXIT_BUTTON_YPOS
-        );
-        exitButton.addListener(exitButtonListener());
-        return exitButton;
+        return button;
     }
 
     private ClickListener playButtonListener() {
@@ -159,14 +160,6 @@ public class MainMenuScreen extends ScreenAdapter {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Button clicked");
                 Gdx.app.exit();
-            }
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                System.out.println("enter");
-            }
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                System.out.println("exit");
             }
         };
     }
