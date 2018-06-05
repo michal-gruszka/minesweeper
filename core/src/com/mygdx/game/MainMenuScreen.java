@@ -143,7 +143,13 @@ public class MainMenuScreen extends ScreenAdapter {
     }
 
     private ClickListener playButtonListener() {
-        return new ClickListener();
+        return new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setScreen(new PlayScreen(game));
+            }
+        };
     }
 
     private ClickListener highscoresButtonListener() {
