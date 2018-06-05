@@ -9,12 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class GridTest {
 
     @Test
-    void testInvalidCoordinatesInGetField() {
-        Grid grid = new Grid(10, 10, 10);
-        assertThrows(IllegalArgumentException.class, () -> {grid.getField(10,2);});
-    }
-
-    @Test
     void testBombGeneration() {
         int width = 16;
         int height = 16;
