@@ -164,7 +164,6 @@ public class MainMenuScreen extends ScreenAdapter {
         return new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button clicked");
                 Gdx.app.exit();
             }
         };
