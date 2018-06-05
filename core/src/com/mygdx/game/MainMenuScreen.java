@@ -163,4 +163,12 @@ public class MainMenuScreen extends ScreenAdapter {
             }
         };
     }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        this.atlas.dispose();
+        this.buttonSkin.dispose();
+        this.stage.dispose();
+    }
 }
