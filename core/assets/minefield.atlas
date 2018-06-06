@@ -1,0 +1,111 @@
+
+minefield.png
+size: 512,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+field_covered
+  rotate: false
+  xy: 2, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_covered_hover
+  rotate: false
+  xy: 34, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_eight
+  rotate: false
+  xy: 66, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_five
+  rotate: false
+  xy: 98, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_flagged
+  rotate: false
+  xy: 130, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_flagged_hover
+  rotate: false
+  xy: 162, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_four
+  rotate: false
+  xy: 194, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_none
+  rotate: false
+  xy: 226, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_one
+  rotate: false
+  xy: 258, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_question_mark
+  rotate: false
+  xy: 290, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_question_mark_hover
+  rotate: false
+  xy: 322, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_seven
+  rotate: false
+  xy: 354, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_six
+  rotate: false
+  xy: 386, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_three
+  rotate: false
+  xy: 418, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
+field_two
+  rotate: false
+  xy: 450, 2
+  size: 30, 30
+  orig: 30, 30
+  offset: 0, 0
+  index: -1
