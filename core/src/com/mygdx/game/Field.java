@@ -1,11 +1,16 @@
 package com.mygdx.game;
 
-public class Field {
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
+public class Field extends ClickListener {
 
     private int x;
     private int y;
     private Content content;
     private Status status;
+    private boolean mouseHover;
 
     public enum Content {
         EMPTY,
@@ -32,6 +37,7 @@ public class Field {
         this.y = y;
         this.content = content;
         this.status = status;
+        this.mouseHover = false;
     }
 
     public int getX() {
@@ -52,5 +58,24 @@ public class Field {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public boolean isMouseHover() {
+        return mouseHover;
+    }
+
+    @Override
+    public void clicked(InputEvent event, float x, float y) {
+        System.out.println(String.format("Button's x, y: %d, %d. Passed x, y: %f, %f", this.x, this.y, x, y));
+    }
+
+    @Override
+    public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+        this.mouseHover = true;
+    }
+
+    @Override
+    public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+        this.mouseHover = false;
     }
 }
