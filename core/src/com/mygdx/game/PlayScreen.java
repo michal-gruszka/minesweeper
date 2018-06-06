@@ -118,24 +118,35 @@ public class PlayScreen extends ScreenAdapter {
             switch (field.getContent()) {
                 case EMPTY:
                     textureName = FIELD_NONE;
+                    break;
                 case ONE:
                     textureName = FIELD_ONE;
+                    break;
                 case TWO:
                     textureName = FIELD_TWO;
+                    break;
                 case THREE:
                     textureName = FIELD_THREE;
+                    break;
                 case FOUR:
                     textureName = FIELD_FOUR;
+                    break;
                 case FIVE:
                     textureName = FIELD_FIVE;
+                    break;
                 case SIX:
                     textureName = FIELD_SIX;
+                    break;
                 case SEVEN:
                     textureName = FIELD_SEVEN;
+                    break;
                 case EIGHT:
                     textureName = FIELD_EIGHT;
+                    break;
                 case BOMB:
+                    // TODO: add missing bomb texture to the atlas
                     textureName = FIELD_BOMB;
+                    break;
             }
         } else if (field.getStatus() == Field.Status.COVERED) {
             textureName = field.isMouseHover() ? FIELD_COVERED_HOVER : FIELD_COVERED;
