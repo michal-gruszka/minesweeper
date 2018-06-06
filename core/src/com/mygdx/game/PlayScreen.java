@@ -59,7 +59,6 @@ public class PlayScreen extends ScreenAdapter {
         for (int x = 0; x < COLUMNS; x++) {
             for (int y = 0; y < ROWS; y++) {
                 Actor actor = createFieldActor(grid.getField(x, y));
-                actor.debug();
                 stage.addActor(actor);
             }
         }
