@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
-public class Grid {
+import static com.mygdx.game.Field.Status.*;
+
+public class Minefield {
 
     private Field[][] grid;
     private int width;
@@ -31,5 +33,20 @@ public class Grid {
         return grid[x][y];
     }
 
+    public void reveal(int x, int y) {
+        Field field = getField(x, y);
 
+        if (field.getStatus() == COVERED) {
+            switch (field.getContent()) {
+                case BOMB:
+                    // TODO: display all bombs, game over
+                    break;
+                case EMPTY:
+                    // TODO: reveal other fields according to rules. Recursion? Queue?
+                    break;
+                default:
+                    field.setStatus(REVEALED);
+            }
+        }
+    }
 }
