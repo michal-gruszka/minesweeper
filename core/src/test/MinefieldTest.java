@@ -1,24 +1,24 @@
 package test;
 
 import com.mygdx.game.Field;
-import com.mygdx.game.Grid;
+import com.mygdx.game.Minefield;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GridTest {
+class MinefieldTest {
 
     @Test
     void testBombGeneration() {
         int width = 16;
         int height = 16;
         int bombs = 40;
-        Grid grid = new Grid(width, height, bombs);
+        Minefield minefield = new Minefield(width, height, bombs);
         int bombCount = 0;
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (grid.getField(x, y).getContent() == Field.Content.BOMB) bombCount++;
+                if (minefield.getField(x, y).getContent() == Field.Content.BOMB) bombCount++;
             }
         }
 
@@ -30,11 +30,11 @@ class GridTest {
         int width = 16;
         int height = 16;
         int bombs = 40;
-        Grid grid = new Grid(width, height, bombs);
+        Minefield minefield = new Minefield(width, height, bombs);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                assertNotNull(grid.getField(x, y));
+                assertNotNull(minefield.getField(x, y));
             }
         }
     }

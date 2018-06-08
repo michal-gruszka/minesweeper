@@ -43,14 +43,14 @@ public class PlayScreen extends ScreenAdapter {
     private TextureAtlas atlas;
     private Skin skin;
     private Stage stage;
-    private Grid grid;
+    private Minefield minefield;
 
     public PlayScreen(MinesweeperGame game) {
         this.game = game;
         this.batch = game.getSpriteBatch();
         this.atlas = new TextureAtlas(Gdx.files.internal(ATLAS));
         this.skin = new Skin(atlas);
-        this.grid = new Grid(COLUMNS, ROWS, 40);
+        this.minefield = new Minefield(COLUMNS, ROWS, 40);
         this.stage = new Stage(new ScreenViewport());
         initializeStage();
     }
@@ -58,7 +58,7 @@ public class PlayScreen extends ScreenAdapter {
     private void initializeStage() {
         for (int x = 0; x < COLUMNS; x++) {
             for (int y = 0; y < ROWS; y++) {
-                Actor actor = createFieldActor(grid.getField(x, y));
+                Actor actor = createFieldActor(minefield.getField(x, y));
                 stage.addActor(actor);
             }
         }
@@ -77,7 +77,7 @@ public class PlayScreen extends ScreenAdapter {
         batch.begin();
         for (int x = 0; x < COLUMNS; x++) {
             for (int y = 0; y < ROWS; y++) {
-                Sprite sprite = createFieldSprite(grid.getField(x, y));
+                Sprite sprite = createFieldSprite(minefield.getField(x, y));
                 sprite.setPosition(x * FIELD_SIZE, y * FIELD_SIZE);
                 sprite.draw(batch);
             }
