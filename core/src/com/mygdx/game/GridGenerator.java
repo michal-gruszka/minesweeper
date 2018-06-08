@@ -4,15 +4,17 @@ import java.util.Random;
 
 public class GridGenerator {
 
+    private Minefield minefield;
     private Field[][] grid;
     private int width;
     private int height;
     private int bombs;
 
-    public Field[][] generate(int width, int height, int bombs) {
-        this.width = width;
-        this.height = height;
-        this.bombs = bombs;
+    public Field[][] generate(Minefield minefield) {
+        this.minefield = minefield;
+        this.width = minefield.getWidth();
+        this.height = minefield.getHeight();
+        this.bombs = minefield.getBombs();
         this.grid = new Field[width][height];
 
         placeRandomBombs();
@@ -26,7 +28,7 @@ public class GridGenerator {
             int x = new Random().nextInt(width);
             int y = new Random().nextInt(height);
             if (grid[x][y] == null) {
-                grid[x][y] = new Field(x, y, Field.Content.BOMB, Field.Status.COVERED);
+                grid[x][y] = new Field(minefield, x, y, Field.Content.BOMB, Field.Status.COVERED);
                 bombsPlaced++;
             }
         }
@@ -37,7 +39,7 @@ public class GridGenerator {
             for (int j = 0; j < height; j++) {
                 if (grid[i][j] == null) {
                     int bombsAround = countBombsAround(grid, i, j);
-                    grid[i][j] = new Field(i, j, intToFieldContent(bombsAround), Field.Status.COVERED);
+                    grid[i][j] = new Field(minefield, i, j, intToFieldContent(bombsAround), Field.Status.COVERED);
                 }
             }
         }
