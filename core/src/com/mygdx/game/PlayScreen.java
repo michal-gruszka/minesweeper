@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -104,7 +105,8 @@ public class PlayScreen extends ScreenAdapter {
     private Actor createFieldActor(Field field) {
         Actor actor = new Actor();
         actor.setBounds(FIELD_SIZE * field.getX(), FIELD_SIZE * field.getY(), FIELD_SIZE, FIELD_SIZE);
-        actor.addListener(field);
+        for (EventListener el: field.getListeners())
+            actor.addListener(el);
 
         return actor;
     }
