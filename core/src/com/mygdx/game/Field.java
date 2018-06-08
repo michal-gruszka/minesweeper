@@ -86,7 +86,8 @@ public class Field extends ClickListener {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println(String.format("Button's x, y: %d, %d. Passed x, y: %f, %f", getX(), getY(), x, y));
                 System.out.println(event.getButton());
-                minefield.reveal(getX(), getY());
+                if (status != Status.FLAG)
+                    minefield.reveal(getX(), getY());
             }
 
             @Override
@@ -106,7 +107,23 @@ public class Field extends ClickListener {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println(String.format("RIGHT CLICK---Button's x, y: %d, %d. Passed x, y: %f, %f", getX(), getY(), x, y));
+                toggleStatus();
+                mouseHover = true;
             }
         };
+    }
+
+    private void toggleStatus() {
+        switch(status) {
+            case COVERED:
+                status = Status.FLAG;
+                break;
+            case FLAG:
+                status = Status.QUESTION_MARK;
+                break;
+            case QUESTION_MARK:
+                status = Status.COVERED;
+                break;
+        }
     }
 }
