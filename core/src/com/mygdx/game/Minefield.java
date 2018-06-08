@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import static com.mygdx.game.Field.Status.*;
+import static com.mygdx.game.Field.Content.*;
+
 
 public class Minefield {
 
@@ -39,7 +41,7 @@ public class Minefield {
         if (field.getStatus() == COVERED) {
             switch (field.getContent()) {
                 case BOMB:
-                    // TODO: display all bombs, game over
+                    revealBombs();
                     break;
                 case EMPTY:
                     // TODO: reveal other fields according to rules. Recursion? Queue?
@@ -48,5 +50,12 @@ public class Minefield {
                     field.setStatus(REVEALED);
             }
         }
+    }
+
+    private void revealBombs() {
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+                if (getField(x, y).getContent() == BOMB)
+                    getField(x, y).setStatus(REVEALED);
     }
 }
