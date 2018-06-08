@@ -10,6 +10,7 @@ public class Field extends ClickListener {
     private int y;
     private Content content;
     private Status status;
+    private Minefield minefield;
     private boolean mouseHover;
 
     public enum Content {
@@ -32,7 +33,8 @@ public class Field extends ClickListener {
         QUESTION_MARK
     }
 
-    public Field(int x, int y, Content content, Status status) {
+    public Field(Minefield minefield, int x, int y, Content content, Status status) {
+        this.minefield = minefield;
         this.x = x;
         this.y = y;
         this.content = content;
