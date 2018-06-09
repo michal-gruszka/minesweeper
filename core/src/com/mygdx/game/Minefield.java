@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.utils.Array;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -38,6 +40,7 @@ public class Minefield {
     }
 
     public void reveal(int x, int y) {
+
         Field field = getField(x, y);
 
         if (field.getStatus() == COVERED) {
@@ -55,8 +58,10 @@ public class Minefield {
     }
 
     private void revealBombs() {
+
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
+
                 if (getField(x, y).getContent() == BOMB)
                     getField(x, y).setStatus(REVEALED);
     }
@@ -69,23 +74,35 @@ public class Minefield {
         while (queue.peek() != null) {
             Field center = queue.poll();
             center.setStatus(REVEALED);
-            int x = center.getX();
-            int y = center.getY();
 
-            for (int i = -1; i <= 1; i++) {
-                for (int j = -1; j <= 1; j++) {
+            for (Field f : getFieldsAround(center)) {
 
-                    if (i == 0 && j == 0) continue;
+                if (f.getStatus() != REVEALED) {
+                    if (f.getContent() == EMPTY)
+                        queue.add(f);
 
-                    if (coordinatesValid(x + i, y + j) && getField(x + i, y + j).getStatus() != REVEALED) {
-                        if (getField(x + i, y + j).getContent() == EMPTY)
-                            queue.add(getField(x + i, y + j));
-
-                        getField(x + i, y + j).setStatus(REVEALED);
-                    }
+                    f.setStatus(REVEALED);
                 }
             }
         }
+    }
+
+    private Array<Field> getFieldsAround(Field center) {
+
+        int x = center.getX();
+        int y = center.getY();
+        Array<Field> fields = new Array<>();
+
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+
+                if (i == 0 && j == 0) continue;
+
+                if (coordinatesValid(x + i, y + j))
+                    fields.add(getField(x + i, y + j));
+            }
+        }
+        return fields;
     }
 
     private boolean coordinatesValid(int x, int y) {
