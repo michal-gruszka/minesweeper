@@ -81,8 +81,6 @@ public class Field {
         return new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println(String.format("Button's x, y: %d, %d. Passed x, y: %f, %f", getX(), getY(), x, y));
-                System.out.println(event.getButton());
                 if (status != Status.FLAG)
                     minefield.reveal(getX(), getY());
             }
@@ -93,7 +91,6 @@ public class Field {
         return new ClickListener(Input.Buttons.RIGHT) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println(String.format("RIGHT CLICK---Button's x, y: %d, %d. Passed x, y: %f, %f", getX(), getY(), x, y));
                 toggleStatus();
             }
         };
