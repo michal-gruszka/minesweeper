@@ -112,7 +112,6 @@ public class PlayScreen extends ScreenAdapter {
     }
 
     private Sprite createFieldSprite(Field field) {
-
         String textureName = "";
 
         if (field.getStatus() == Field.Status.REVEALED) {
@@ -145,18 +144,17 @@ public class PlayScreen extends ScreenAdapter {
                     textureName = FIELD_EIGHT;
                     break;
                 case BOMB:
-                    // TODO: add missing bomb texture to the atlas
                     textureName = FIELD_BOMB;
                     break;
             }
         } else if (field.getStatus() == Field.Status.COVERED) {
-            textureName = field.isMouseHover() ? FIELD_COVERED_HOVER : FIELD_COVERED;
+            textureName = field.isMouseOver() ? FIELD_COVERED_HOVER : FIELD_COVERED;
 
         } else if (field.getStatus() == Field.Status.FLAG) {
-            textureName = field.isMouseHover() ? FIELD_FLAGGED_HOVER : FIELD_FLAGGED;
+            textureName = field.isMouseOver() ? FIELD_FLAGGED_HOVER : FIELD_FLAGGED;
 
         } else if (field.getStatus() == Field.Status.QUESTION_MARK) {
-            textureName = field.isMouseHover() ? FIELD_QUESTION_MARK_HOVER : FIELD_QUESTION_MARK;
+            textureName = field.isMouseOver() ? FIELD_QUESTION_MARK_HOVER : FIELD_QUESTION_MARK;
         }
 
         if (textureName == "") throw new RuntimeException("Unexpected field status and/or condition");

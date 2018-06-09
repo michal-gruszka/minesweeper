@@ -1,19 +1,17 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 
-public class Field extends ClickListener {
+public class Field {
 
     private int x;
     private int y;
     private Content content;
     private Status status;
     private Minefield minefield;
-    private boolean mouseHover;
     private Array<ClickListener> listeners;
 
     public enum Content {
@@ -42,7 +40,6 @@ public class Field extends ClickListener {
         this.y = y;
         this.content = content;
         this.status = status;
-        this.mouseHover = false;
         initializeListeners();
     }
 
@@ -70,8 +67,8 @@ public class Field extends ClickListener {
         return listeners;
     }
 
-    public boolean isMouseHover() {
-        return mouseHover;
+    public boolean isMouseOver() {
+        return listeners.get(0).isOver();
     }
 
     private void initializeListeners() {
@@ -89,16 +86,6 @@ public class Field extends ClickListener {
                 if (status != Status.FLAG)
                     minefield.reveal(getX(), getY());
             }
-
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                mouseHover = true;
-            }
-
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                mouseHover = false;
-            }
         };
     }
 
@@ -108,7 +95,6 @@ public class Field extends ClickListener {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println(String.format("RIGHT CLICK---Button's x, y: %d, %d. Passed x, y: %f, %f", getX(), getY(), x, y));
                 toggleStatus();
-                mouseHover = true;
             }
         };
     }
