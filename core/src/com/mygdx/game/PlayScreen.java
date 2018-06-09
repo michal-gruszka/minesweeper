@@ -21,7 +21,7 @@ public class PlayScreen extends ScreenAdapter {
     private static final int FIELD_SIZE = MinesweeperGame.HEIGHT / ROWS;
 
     // texture names
-    private static final String ATLAS = "minefield.atlas";
+    private static final String ATLAS = "play_screen.atlas";
     private static final String FIELD_COVERED = "field_covered";
     private static final String FIELD_COVERED_HOVER = "field_covered_hover";
     private static final String FIELD_FLAGGED = "field_flagged";

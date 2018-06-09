@@ -1,118 +1,132 @@
 
-minefield.png
-size: 256,128
+play_screen.png
+size: 1024,64
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 field_covered
   rotate: false
-  xy: 2, 66
+  xy: 244, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_covered_hover
   rotate: false
-  xy: 2, 34
+  xy: 276, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_eight
   rotate: false
-  xy: 34, 66
+  xy: 308, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_bomb
   rotate: false
-  xy: 2, 2
+  xy: 340, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_five
   rotate: false
-  xy: 34, 34
+  xy: 372, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_flagged
   rotate: false
-  xy: 66, 66
+  xy: 404, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_flagged_hover
   rotate: false
-  xy: 34, 2
+  xy: 436, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_four
   rotate: false
-  xy: 66, 34
+  xy: 468, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_none
   rotate: false
-  xy: 98, 66
+  xy: 500, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_one
   rotate: false
-  xy: 66, 2
+  xy: 532, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_question_mark
   rotate: false
-  xy: 98, 34
+  xy: 564, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_question_mark_hover
   rotate: false
-  xy: 130, 66
+  xy: 596, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_seven
   rotate: false
-  xy: 98, 2
+  xy: 628, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_six
   rotate: false
-  xy: 130, 34
+  xy: 660, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_three
   rotate: false
-  xy: 162, 66
+  xy: 692, 12
   size: 30, 30
   orig: 30, 30
   offset: 0, 0
   index: -1
 field_two
   rotate: false
-  xy: 130, 2
+  xy: 724, 12
   size: 30, 30
   orig: 30, 30
+  offset: 0, 0
+  index: -1
+restart_button_gold
+  rotate: false
+  xy: 2, 2
+  size: 119, 40
+  orig: 119, 40
+  offset: 0, 0
+  index: -1
+restart_button_silver
+  rotate: false
+  xy: 123, 2
+  size: 119, 40
+  orig: 119, 40
   offset: 0, 0
   index: -1
