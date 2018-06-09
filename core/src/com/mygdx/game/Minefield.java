@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import static com.mygdx.game.Field.Status.*;
 import static com.mygdx.game.Field.Content.*;
 
@@ -12,7 +15,6 @@ public class Minefield {
     private int bombs;
 
     public Minefield(int width, int height, int bombs) {
-        this.grid = grid;
         this.width = width;
         this.height = height;
         this.bombs = bombs;
@@ -44,7 +46,7 @@ public class Minefield {
                     revealBombs();
                     break;
                 case EMPTY:
-                    // TODO: reveal other fields according to rules. Recursion? Queue?
+                    revealAroundEmpty(field);
                     break;
                 default:
                     field.setStatus(REVEALED);
@@ -57,5 +59,36 @@ public class Minefield {
             for (int y = 0; y < height; y++)
                 if (getField(x, y).getContent() == BOMB)
                     getField(x, y).setStatus(REVEALED);
+    }
+
+    private void revealAroundEmpty(Field field) {
+
+        Queue<Field> queue = new LinkedList<>();
+        queue.add(field);
+
+        while (queue.peek() != null) {
+            Field center = queue.poll();
+            center.setStatus(REVEALED);
+            int x = center.getX();
+            int y = center.getY();
+
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+
+                    if (i == 0 && j == 0) continue;
+
+                    if (coordinatesValid(x + i, y + j) && getField(x + i, y + j).getStatus() != REVEALED) {
+                        if (getField(x + i, y + j).getContent() == EMPTY)
+                            queue.add(getField(x + i, y + j));
+
+                        getField(x + i, y + j).setStatus(REVEALED);
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean coordinatesValid(int x, int y) {
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
 }
