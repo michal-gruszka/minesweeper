@@ -10,8 +10,11 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class PlayScreen extends ScreenAdapter {
@@ -19,6 +22,11 @@ public class PlayScreen extends ScreenAdapter {
     private static final int COLUMNS = 16;
     private static final int ROWS = 16;
     private static final int FIELD_SIZE = MinesweeperGame.HEIGHT / ROWS;
+    private static final int BUTTON_WIDTH = 119;
+    private static final int BUTTON_HEIGHT = 40;
+    private static final int BUTTON_MARGIN = 20;
+    private static final int BUTTON_XPOS = MinesweeperGame.WIDTH - BUTTON_WIDTH - BUTTON_MARGIN;
+    private static final int RESTART_BUTTON_YPOS = BUTTON_HEIGHT + BUTTON_MARGIN;
 
     // texture names
     private static final String ATLAS = "play_screen.atlas";
@@ -38,6 +46,8 @@ public class PlayScreen extends ScreenAdapter {
     private static final String FIELD_SEVEN = "field_seven";
     private static final String FIELD_EIGHT = "field_eight";
     private static final String FIELD_BOMB = "field_bomb";
+    private static final String RESTART_BUTTON = "restart_button_silver";
+    private static final String RESTART_BUTTON_HOVER = "restart_button_gold";
 
     private MinesweeperGame game;
     private SpriteBatch batch;
@@ -63,6 +73,7 @@ public class PlayScreen extends ScreenAdapter {
                 stage.addActor(actor);
             }
         }
+        stage.addActor(createRestartButton(skin));
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -71,6 +82,7 @@ public class PlayScreen extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderBackground(game.getShapeRenderer());
         stage.act();
+        stage.draw();
         renderFields();
     }
 
@@ -160,5 +172,36 @@ public class PlayScreen extends ScreenAdapter {
         if (textureName == "") throw new RuntimeException("Unexpected field status and/or condition");
 
         return new Sprite(atlas.findRegion(textureName));
+    }
+
+    private ImageButton createRestartButton(Skin skin) {
+
+        ImageButton.ImageButtonStyle buttonStyle = new ImageButton.ImageButtonStyle();
+        buttonStyle.up = skin.getDrawable(RESTART_BUTTON);
+        buttonStyle.over = skin.getDrawable(RESTART_BUTTON_HOVER);
+
+        ImageButton button = new ImageButton(buttonStyle);
+        button.setPosition(BUTTON_XPOS, RESTART_BUTTON_YPOS);
+        button.addListener(restartButtonListener());
+
+        return button;
+    }
+
+    private ClickListener restartButtonListener() {
+        return new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                dispose();
+                game.setScreen(new PlayScreen(game));
+            }
+        };
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        this.atlas.dispose();
+        this.skin.dispose();
+        this.stage.dispose();
     }
 }
