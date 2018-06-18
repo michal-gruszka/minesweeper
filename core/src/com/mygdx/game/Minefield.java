@@ -16,12 +16,14 @@ public class Minefield {
     private int height;
     private int bombs;
     private int flags;
+    private int revealed;
 
     public Minefield(int width, int height, int bombs) {
         this.width = width;
         this.height = height;
         this.bombs = bombs;
         this.flags = 0;
+        this.revealed = 0;
         this.grid = new GridGenerator().generate(this);
     }
 
@@ -43,6 +45,14 @@ public class Minefield {
 
     public void setFlags(int flags) {
         this.flags = flags;
+    }
+
+    public int getRevealed() {
+        return revealed;
+    }
+
+    public void setRevealed(int revealed) {
+        this.revealed = revealed;
     }
 
     public Field getField(int x, int y) {

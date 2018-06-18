@@ -60,6 +60,12 @@ public class Field {
     }
 
     public void setStatus(Status status) {
+        updateFlagsCounter(status);
+        updateRevealedCounter(status);
+        this.status = status;
+    }
+
+    private void updateFlagsCounter(Status status) {
         int flags = this.minefield.getFlags();
 
         if (this.status != Status.FLAG && status == Status.FLAG) {
@@ -68,8 +74,14 @@ public class Field {
         } else if (this.status == Status.FLAG && status != Status.FLAG) {
             this.minefield.setFlags(--flags);
         }
+    }
 
-        this.status = status;
+    private void updateRevealedCounter(Status status) {
+        int revealed = this.minefield.getRevealed();
+
+        if (this.status != Status.REVEALED && status == Status.REVEALED) {
+            this.minefield.setRevealed(++revealed);
+        }
     }
 
     public Array<ClickListener> getListeners() {
