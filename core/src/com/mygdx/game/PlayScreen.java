@@ -28,6 +28,8 @@ public class PlayScreen extends ScreenAdapter {
     private static final int BUTTON_MARGIN = 20;
     private static final int BUTTON_XPOS = MinesweeperGame.WIDTH - BUTTON_WIDTH - BUTTON_MARGIN;
     private static final int RESTART_BUTTON_YPOS = BUTTON_HEIGHT + BUTTON_MARGIN;
+    private static final int TIME_COUNTER_XPOS = 520;
+    private static final int TIME_COUNTER_YPOS = 460;
     private static final int BOMB_COUNTER_XPOS = 520;
     private static final int BOMB_COUNTER_YPOS = 440;
 
@@ -59,6 +61,9 @@ public class PlayScreen extends ScreenAdapter {
     private Stage stage;
     private Minefield minefield;
     private BitmapFont font;
+    private boolean roundStarted;
+    private long startTime;
+    private long playTime;
 
     public PlayScreen(MinesweeperGame game) {
         this.game = game;
@@ -70,6 +75,7 @@ public class PlayScreen extends ScreenAdapter {
         initializeStage();
         this.font = new BitmapFont();
         font.setColor(0, 0, 0, 1);
+        this.roundStarted = false;
     }
 
     private void initializeStage() {
@@ -85,12 +91,26 @@ public class PlayScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        checkIsGameRunning();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderBackground(game.getShapeRenderer());
         stage.act();
         stage.draw();
         renderFields();
+        renderTimeCounter();
         renderBombCounter();
+    }
+
+    private void checkIsGameRunning() {
+        if (!roundStarted && minefield.getRevealed() > 0) {
+            roundStarted = true;
+            startTime = System.currentTimeMillis();
+        }
+
+        if(roundStarted) {
+            playTime = System.currentTimeMillis() - startTime;
+        }
+
     }
 
     private void renderFields() {
@@ -102,6 +122,16 @@ public class PlayScreen extends ScreenAdapter {
                 sprite.draw(batch);
             }
         }
+        batch.end();
+    }
+
+    private void renderTimeCounter() {
+        long inSeconds = playTime / 1000;
+        long minutes = inSeconds / 60;
+        long seconds = inSeconds - minutes * 60;
+        String timeCounter = String.format("time: %d : %02d", minutes, seconds);
+        batch.begin();
+        font.draw(batch, timeCounter, TIME_COUNTER_XPOS, TIME_COUNTER_YPOS);
         batch.end();
     }
 
