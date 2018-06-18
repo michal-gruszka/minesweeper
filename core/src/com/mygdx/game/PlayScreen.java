@@ -217,5 +217,6 @@ public class PlayScreen extends ScreenAdapter {
         this.atlas.dispose();
         this.skin.dispose();
         this.stage.dispose();
+        this.font.dispose();
     }
 }
