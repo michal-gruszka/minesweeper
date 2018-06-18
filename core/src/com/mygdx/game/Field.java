@@ -60,6 +60,15 @@ public class Field {
     }
 
     public void setStatus(Status status) {
+        int flags = this.minefield.getFlags();
+
+        if (this.status != Status.FLAG && status == Status.FLAG) {
+            this.minefield.setFlags(++flags);
+
+        } else if (this.status == Status.FLAG && status != Status.FLAG) {
+            this.minefield.setFlags(--flags);
+        }
+
         this.status = status;
     }
 
@@ -99,13 +108,13 @@ public class Field {
     private void toggleStatus() {
         switch(status) {
             case COVERED:
-                status = Status.FLAG;
+                setStatus(Status.FLAG);
                 break;
             case FLAG:
-                status = Status.QUESTION_MARK;
+                setStatus(Status.QUESTION_MARK);
                 break;
             case QUESTION_MARK:
-                status = Status.COVERED;
+                setStatus(Status.COVERED);
                 break;
         }
     }

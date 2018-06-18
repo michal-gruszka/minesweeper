@@ -15,11 +15,13 @@ public class Minefield {
     private int width;
     private int height;
     private int bombs;
+    private int flags;
 
     public Minefield(int width, int height, int bombs) {
         this.width = width;
         this.height = height;
         this.bombs = bombs;
+        this.flags = 0;
         this.grid = new GridGenerator().generate(this);
     }
 
@@ -33,6 +35,14 @@ public class Minefield {
 
     public int getBombs() {
         return bombs;
+    }
+
+    public int getFlags() {
+        return flags;
+    }
+
+    public void setFlags(int flags) {
+        this.flags = flags;
     }
 
     public Field getField(int x, int y) {

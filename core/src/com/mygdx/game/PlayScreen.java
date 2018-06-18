@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -27,6 +28,8 @@ public class PlayScreen extends ScreenAdapter {
     private static final int BUTTON_MARGIN = 20;
     private static final int BUTTON_XPOS = MinesweeperGame.WIDTH - BUTTON_WIDTH - BUTTON_MARGIN;
     private static final int RESTART_BUTTON_YPOS = BUTTON_HEIGHT + BUTTON_MARGIN;
+    private static final int BOMB_COUNTER_XPOS = 520;
+    private static final int BOMB_COUNTER_YPOS = 440;
 
     // texture names
     private static final String ATLAS = "play_screen.atlas";
@@ -55,6 +58,7 @@ public class PlayScreen extends ScreenAdapter {
     private Skin skin;
     private Stage stage;
     private Minefield minefield;
+    private BitmapFont font;
 
     public PlayScreen(MinesweeperGame game) {
         this.game = game;
@@ -64,6 +68,8 @@ public class PlayScreen extends ScreenAdapter {
         this.minefield = new Minefield(COLUMNS, ROWS, 40);
         this.stage = new Stage(new ScreenViewport());
         initializeStage();
+        this.font = new BitmapFont();
+        font.setColor(0, 0, 0, 1);
     }
 
     private void initializeStage() {
@@ -84,6 +90,7 @@ public class PlayScreen extends ScreenAdapter {
         stage.act();
         stage.draw();
         renderFields();
+        renderBombCounter();
     }
 
     private void renderFields() {
@@ -95,6 +102,13 @@ public class PlayScreen extends ScreenAdapter {
                 sprite.draw(batch);
             }
         }
+        batch.end();
+    }
+
+    private void renderBombCounter() {
+        String bombCounter = String.format("bombs: %d / %d", minefield.getFlags(), minefield.getBombs());
+        batch.begin();
+        font.draw(batch, bombCounter, BOMB_COUNTER_XPOS, BOMB_COUNTER_YPOS);
         batch.end();
     }
 
